@@ -1,0 +1,32 @@
+{
+    "theme_color": "#222222",
+    "background_color": "#0617B0",
+    "display": "fullscreen",
+    "scope": "/pwa-parcial-1-dwm3ap-cagnoni-juancruz/",
+    "start_url": "/pwa-parcial-1-dwm3ap-cagnoni-juancruz/index.html",
+    "name": "Last News WorldWide",
+    "short_name": "Last News ",
+    "description": "In this application you will find out about all the trending news in the world.",
+    "icons": [
+        {
+            "src": "img/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "img/icon-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "img/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "img/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

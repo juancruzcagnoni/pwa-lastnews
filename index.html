@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Last News</title>
+	<!-- Manifest	 -->
+	<link rel="manifest" href="manifest.json">
+	<!-- Icon  -->
+	<link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+	<!-- Icons Bootstrap -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+	<!-- CSS Bootstrap -->
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<!-- CSS -->
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+	<!-- Navbar -->
+	<nav class="navbar">
+		<div class="container d-flex">
+			<a class="navbar-brand" href="#"><img src="img/logo.png" alt="Logo" width="70"></a>
+			<a id="favorites">Favorites</a>
+		</div>
+	</nav>
+
+	<div id="modalFavorites"></div>
+
+	<!-- Main -->
+	<main>
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-md-6">
+					<h1>Find out all the global news, minute by minute with LastNews.</h1>
+					<p>Stay informed on the latest events and developments from around the world with our comprehensive
+						coverage. From breaking news to in-depth analysis, we've got you covered. Join our community
+						today and be a part of the conversation.</p>
+					<div class="d-flex align-items-center">
+						<a href="#response">Read News</a>
+						<p class="m-0 ms-4" id="status"><i class="bi bi-dot"></i>Status</p>
+					</div>
+				</div>
+				<div class="col-12 col-md-6">
+					<img class="img-fluid" src="img/main.jpg">
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<!-- Content -->
+	<div class="container content">
+		<div id="response" class="row"></div>
+	</div>
+
+	<div id="modal"></div>
+
+	<!-- Footer  -->
+	<footer>
+		<p>Last News &copy; All rights reserved.</p>
+		<p>PWA - Parcial I - Juan Cruz Cagnoni.</p>
+	</footer>
+
+	<!-- Javascript Bootstrap -->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<!-- Javascript -->
+	<script src="js/main.js"></script>
+</body>
+
+</html>
