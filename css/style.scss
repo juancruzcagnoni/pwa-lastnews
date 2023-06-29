@@ -211,7 +211,8 @@ main {
   width: 60%;
 }
 
-.favorites-button {
+.favorites-button, #botonInstall {
+  border: none;
   cursor: pointer;
   background-color: $red;
   padding: 8px 28px;

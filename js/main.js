@@ -1,13 +1,14 @@
-const div = document.getElementById("response");
-const main = document.getElementById("lastNew");
-const section = document.getElementById("section");
-const modal = document.getElementById("modal");
-const favoritesMenu = document.getElementById("favorites");
-const modalFavorites = document.getElementById("modalFavorites");
+// Obtener referencias a elementos del DOM
+const div = document.getElementById("response"); 
+const main = document.getElementById("lastNew"); 
+const section = document.getElementById("section"); 
+const modal = document.getElementById("modal"); 
+const favoritesMenu = document.getElementById("favorites"); 
+const modalFavorites = document.getElementById("modalFavorites"); 
 
-let favorites = [];
+let favorites = []; // Array para almacenar las noticias favoritas
 
-// Notificaciones
+// Función para mostrar una notificación de confirmación
 function showNotificationConfirmation() {
   const confirmation = confirm("¿Deseas recibir notificaciones?");
   if (confirmation) {
@@ -21,6 +22,7 @@ function showNotificationConfirmation() {
   }
 }
 
+// Función para enviar una notificación
 function sendNotification() {
   const notificationTitle = "¡Bienvenido a LastNews!";
   const notificationOptions = {
@@ -30,6 +32,7 @@ function sendNotification() {
   showNotification(notificationTitle, notificationOptions);
 }
 
+// Función para mostrar una notificación
 function showNotification(title, options) {
   // Verificar si el navegador admite las notificaciones.
   if ("Notification" in window) {
@@ -41,6 +44,7 @@ function showNotification(title, options) {
   }
 }
 
+// Función para manejar el evento de conexión en línea
 function handleOnline() {
   const status = document.getElementById("status");
   // Realizar los cambios estéticos para el estado en línea
@@ -49,6 +53,7 @@ function handleOnline() {
   console.log("Estás en línea");
 }
 
+// Función para manejar el evento de conexión sin conexión
 function handleOffline() {
   const status = document.getElementById("status");
   // Realizar los cambios estéticos para el estado sin conexión
@@ -57,12 +62,13 @@ function handleOffline() {
   console.log("Estás sin conexión");
 }
 
+// Evento que se dispara cuando el DOM se ha cargado
 window.addEventListener("DOMContentLoaded", function () {
-  // Registramos service worker.
+  // Registrar el service worker
   if ("serviceWorker" in navigator) {
     this.navigator.serviceWorker
       .register("sw.js")
-      .then((res) => console.log("El SW se registro correctamente."))
+      .then((res) => console.log("El SW se registró correctamente."))
       .catch((err) => console.log("El SW no se pudo registrar"));
   }
 
@@ -91,13 +97,13 @@ window.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("online", handleOnline);
   window.addEventListener("offline", handleOffline);
 
-  // Traemos la API.
+  // URL de la API de noticias
   const url =
     "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=65dbea689e6a43a5866bd6f451512edd";
 
-  // Realizamos la solicitud Fetch para recuperar el archivo JSON.
+  // Realizar la solicitud Fetch para recuperar el archivo JSON.
   fetch(url)
-    // Convertimos la respuesta JSON en un objeto JavaScript.
+    // Convertir la respuesta JSON en un objeto JavaScript.
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
@@ -116,14 +122,14 @@ window.addEventListener("DOMContentLoaded", function () {
 
         // Listado de noticias.
         for (const article of storedData) {
-          // Creamos la tarjeta de la noticia.
+          // Crear la tarjeta de la noticia.
           let cardContainer = document.createElement("div");
           cardContainer.className = "new";
 
           cardContainer.innerHTML = `
-          <h3 href="">${article.title}</h3>
-          <p>${article.description}</p>
-        `;
+            <h3 href="">${article.title}</h3>
+            <p>${article.description}</p>
+          `;
 
           let cardContainerBottom = document.createElement("div");
           cardContainerBottom.className = "card-container-bottom";
@@ -131,7 +137,7 @@ window.addEventListener("DOMContentLoaded", function () {
           let published = this.document.createElement("p");
           published.innerHTML = `${article.publishedAt}`;
 
-          // Creamos el boton para ver el detalle de la noticia en una ventana modal.
+          // Crear el botón para ver el detalle de la noticia en una ventana modal.
           let linkNew = document.createElement("a");
           linkNew.className = "link";
           linkNew.innerHTML = "See more";
@@ -142,29 +148,35 @@ window.addEventListener("DOMContentLoaded", function () {
             let containerNew = document.createElement("div");
             containerNew.classList.add("container-new", "row", "pt-4");
             containerNew.innerHTML = `
-
-            <div class="p-3 col-12 col-md-6 mt-5">
-              <h3 class="title" href="">${article.title}</h3>
-              <p class="description">${article.description}</p>
-              <p class="contentNew">${article.content}</p>
-              <p class="author">Author: ${article.author}</p>
-              <p class="dateNew mt-5">${article.publishedAt}</p>
-            </div>
-          
-          `;
+              <div class="p-3 col-12 col-md-6 mt-5">
+                <h3 class="title" href="">${article.title}</h3>
+                <p class="description">${article.description}</p>
+                <p class="contentNew">${article.content}</p>
+                <p class="author">Author: ${article.author}</p>
+                <p class="dateNew mt-5">${article.publishedAt}</p>
+              </div>
+            `;
 
             let imgContainer = this.document.createElement("div");
-            imgContainer.classList.add("p-3", "col-12", "col-md-6", 'mt-5', 'd-flex', 'flex-column', 'align-items-center');
+            imgContainer.classList.add(
+              "p-3",
+              "col-12",
+              "col-md-6",
+              "mt-5",
+              "d-flex",
+              "flex-column",
+              "align-items-center"
+            );
 
             let img = this.document.createElement("img");
             img.src = `${article.urlToImage}`;
-            img.classList.add('imgNew', 'img-fluid');
+            img.classList.add("imgNew", "img-fluid");
 
             // Div para los botones
             let containerButtons = document.createElement("div");
             containerButtons.className = "container-buttons";
 
-            // Creamos el boton para agregar a favoritos.
+            // Crear el botón para agregar a favoritos.
             let favoritesButton = document.createElement("a");
             favoritesButton.className = "favorites-button";
             favoritesButton.innerHTML =
@@ -174,7 +186,7 @@ window.addEventListener("DOMContentLoaded", function () {
               console.log(favorites);
             });
 
-            // Creamos el boton para compartir
+            // Crear el botón para compartir
             const shareButton = document.createElement("a");
             shareButton.className = "share-button";
             shareButton.innerHTML = "Share";
@@ -200,7 +212,7 @@ window.addEventListener("DOMContentLoaded", function () {
               }
             });
 
-            // Boton para cerrar la ventana modal de la noticia.
+            // Botón para cerrar la ventana modal de la noticia.
             let close = document.createElement("div");
             close.className = "close";
 
@@ -226,7 +238,7 @@ window.addEventListener("DOMContentLoaded", function () {
         }
       }
 
-      // Creamos la ventana modal de los favoritos.
+      // Crear la ventana modal de los favoritos.
       favoritesMenu.addEventListener("click", () => {
         modalFavorites.style.display = "flex";
 
@@ -246,7 +258,7 @@ window.addEventListener("DOMContentLoaded", function () {
             <p class="favorite-new mb-0 me-5">${favoriteNew.title}</p>
           `;
 
-          // Boton para eliminar una noticia de favoritos.
+          // Botón para eliminar una noticia de favoritos.
           let deleteNew = document.createElement("a");
           deleteNew.innerHTML = '<i class="bi bi-trash me-3"></i>';
           deleteNew.style.cursor = "pointer";
@@ -259,7 +271,7 @@ window.addEventListener("DOMContentLoaded", function () {
           containerFavorites.append(favoriteNewContainer);
         });
 
-        // Boton para cerrar la ventana modal de los favoritos.
+        // Botón para cerrar la ventana modal de los favoritos.
         let close = this.document.createElement("div");
         close.className = "close";
 
@@ -276,8 +288,55 @@ window.addEventListener("DOMContentLoaded", function () {
         containerFavorites.append(close);
         modalFavorites.append(containerFavorites);
       });
+
+      // Verificar si el navegador es compatible con la instalación de PWA
+      if ("serviceWorker" in navigator && "InstallTrigger" in window) {
+        // Mostrar el botón de instalación
+        const installButton = document.getElementById("installButton");
+        installButton.style.display = "block";
+
+        // Agregar el evento click al botón de instalación
+        installButton.addEventListener("click", () => {
+          // Registrar el service worker y solicitar la instalación de la PWA
+          navigator.serviceWorker.ready.then((registration) => {
+            registration.prompt();
+            registration.userChoice.then((choiceResult) => {
+              if (choiceResult.outcome === "accepted") {
+                console.log("La PWA ha sido instalada.");
+              } else {
+                console.log("La instalación de la PWA ha sido cancelada.");
+              }
+            });
+          });
+        });
+      }
     })
-    .catch((error) => {
-      console.error(error);
-    });
+    .catch((error) => console.log(error));
 });
+
+// Instalacion 
+let instalacion = null;
+const btnInstall = document.getElementById('botonInstall');
+
+btnInstall.addEventListener('click', instalarPWA);
+
+window.addEventListener('beforeinstallprompt', guardarEvento);
+
+function guardarEvento(evento){
+    instalacion = evento;
+    btnInstall.removeAttribute('hidden');
+}
+
+function instalarPWA(evento){
+    instalacion.prompt();
+    evento.srcElement.setAttribute('hidden', true);
+    instalacion.userChoice
+                    .then((choice) => {
+                        if(choice.outcome === 'accepted'){
+                            console.log('Acepto la instalacion');
+                        } else {
+                            console.log('No acepto la instalacion');
+                        }
+                        instalacion = null;
+                    })
+}
